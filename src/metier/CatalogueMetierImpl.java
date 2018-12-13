@@ -12,7 +12,7 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 	 Statement stmt = null;
 	 PreparedStatement ps = null;
 	 Connection conn = SingletonConnection.getConncetion();
-	 List<Produit> produits = new ArrayList<Produit>();
+	 
 	
 	@Override
 	public void addProduit(Produit p) {
@@ -22,10 +22,10 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 		try {
 			
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
-			preparedStmt.setString (1, "PR04");
-			preparedStmt.setString (2, "Ord HP 333");
-			preparedStmt.setInt(3, 111);
-			preparedStmt.setInt(4, 2222);
+			preparedStmt.setString (1, p.getReference());
+			preparedStmt.setString (2, p.getReference());
+			preparedStmt.setDouble(3, p.getPrix());
+			preparedStmt.setInt(4, p.getQuantite());
 			preparedStmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -36,7 +36,9 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 
 	@Override
 	public List<Produit> listProduit() {
+		List<Produit> produits = new ArrayList<Produit>();
 		// TODO Auto-generated method stub
+		System.out.print("entered produit");
 		String query = "SELECT `produits`.`REF_PROD`,`produits`.`DESIGNATION`,`produits`.`PRIX`,`produits`.`QUANTITE`\r\n" + 
 				"FROM `cat_perod`.`produits`;";
 
@@ -70,17 +72,14 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 
 	@Override
 	public List<Produit> produitParMC(String mc) {
+		List<Produit> produits = new ArrayList<Produit>();
 		// TODO Auto-generated method stub
 		String query = "SELECT `produits`.`REF_PROD`,`produits`.`DESIGNATION`,`produits`.`PRIX`,`produits`.`QUANTITE`\r\n" + 
-				"FROM `cat_perod`.`produits` WHERE `produits`.`REF_PROD`=?;";
+				"FROM `cat_perod`.`produits`;";
+		System.out.print("entered produit mc");
 		try {
-//			System.out.println("mc="+mc);
 			ps = conn.prepareStatement(query);
-//			PreparedStatement ps = conn.prepareStatement("SELECT `produits`.`REF_PROD`,`produits`.`DESIGNATION`,`produits`.`PRIX`,`produits`.`QUANTITE`\r\n" + 
-//					"FROM `cat_perod`.`produits` WHERE `produits`.`DESIGNATION`=?;");
-			ps.setString(1, mc);
-
-			ResultSet rs = ps.executeQuery();	
+			ResultSet rs = ps.executeQuery(query);
 			
 			while(rs.next()){
 		         //Retrieve by column name
@@ -88,22 +87,25 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 		         String design  = rs.getString("DESIGNATION");
 		         int prix = rs.getInt("PRIX");
 		         int quantite = rs.getInt("QUANTITE");
-
+		         
+		         if(ref.contains(mc)||design.contains(mc)||String.valueOf(prix).contains(mc)||String.valueOf(quantite).contains(mc)) {
+		        	 Produit p = new Produit(ref, design, prix, quantite);
+		        	 produits.add(p);
+		         }
+		         
 		         //Display values
 //		         System.out.print("Refrence: " + ref);
 //		         System.out.print(", Desingnation: " + design);
 //		         System.out.print(", Prix: " + prix);
 //		         System.out.println(", Quantite: " + quantite);
 		         
-		         Produit p = new Produit(ref, design, prix, quantite);
-		         produits.add(p);
 		        
 		      }
-			
+			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		return produits;
 	}
 

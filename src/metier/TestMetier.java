@@ -18,8 +18,8 @@ public class TestMetier {
 			
 		conn = SingletonConnection.getConncetion();
 //		insertMeth();
-//		fetchtMeth();
-		fetchtMethKey("Ord HP 760");
+		fetchtMeth();
+//		fetchtMethKey("Ord HP 760");
 //		fetchtMethRef("PR03");
 //		updateMeth("PR03", "HP macbook", 1330, 50);
 //		deleteMeth("PR02");

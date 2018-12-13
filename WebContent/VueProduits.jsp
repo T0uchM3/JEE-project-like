@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div>
-		<form action="controleur.php" method="post">
+		<form action="ControleurServlet" method="POST">
 
 			<table>
 				<tr>
@@ -28,26 +28,27 @@
 		<table>
 			<tr>
 				<td>REF:</td>
-				<td>var</td>
+				<td><input type="text" name="ref" value="${ref}" size=20 /></td>
 				</tr>
 				<tr>
 				<td>Designation:</td>
-				<td><input type="text" name="reg" vlaue"" size=20 " /></td>
+				<td><input type="text" name="reg" value="${des}" size=20 /></td>
 				</tr>
 				<tr>
 				<td>Prix:</td>
-				<td><input type="text" name="prix" vlaue"" size=20 /></td>
+				<td><input type="text" name="prix"value="${prix}" size=20 /></td>
 				</tr>
 				<tr>
 				<td>Quantite:</td>
-				<td><input type="text" name="quantite" vlaue""/></td>
+				<td><input type="text" name="quantite" value="${quan}"/></td>
 			</tr>
 		</table>
-		<input type="submit" name="action2" value="save" /><br>
+		<input type="submit" name="action" value="save" /><br>
 		</form>
 	</div>
 
 	<div>
+<!-- 	<form action="ControleurServlet" method="POST"> -->
 		<table class="table1">
 			<tr>
 				<th>REF</th>
@@ -61,12 +62,14 @@
 					<td>${p.designation}</td>
 					<td>${p.prix}</td>
 					<td>${p.quantite}</td>
-					<td><a href="ControleurServlet.jsp?ref=${p.reference}">Supprimer</a></td>
+					<td><a href="ControleurServlet?action=delete&ref=${p.reference}">Supprimer</a></td>
+					<td><a href="ControleurServlet?action=edit&ref=${p.reference}">Edit</a></td>
 				</tr>
 
 			</c:forEach>
 
 		</table>
+<!-- 		</form> -->
 	</div>
 
 
