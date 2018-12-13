@@ -38,7 +38,7 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 	public List<Produit> listProduit() {
 		List<Produit> produits = new ArrayList<Produit>();
 		// TODO Auto-generated method stub
-		System.out.print("entered produit");
+//		System.out.print("entered produit");
 		String query = "SELECT `produits`.`REF_PROD`,`produits`.`DESIGNATION`,`produits`.`PRIX`,`produits`.`QUANTITE`\r\n" + 
 				"FROM `cat_perod`.`produits`;";
 
@@ -54,10 +54,10 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 		         int quantite = rs.getInt("QUANTITE");
 
 		         //Display values
-		         System.out.print("Refrence: " + ref);
-		         System.out.print(", Desingnation: " + design);
-		         System.out.print(", Prix: " + prix);
-		         System.out.println(", Quantite: " + quantite);
+//		         System.out.print("Refrence: " + ref);
+//		         System.out.print(", Desingnation: " + design);
+//		         System.out.print(", Prix: " + prix);
+//		         System.out.println(", Quantite: " + quantite);
 		         
 		         Produit p = new Produit(ref, design, prix, quantite);
 		         produits.add(p);
@@ -76,7 +76,7 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 		// TODO Auto-generated method stub
 		String query = "SELECT `produits`.`REF_PROD`,`produits`.`DESIGNATION`,`produits`.`PRIX`,`produits`.`QUANTITE`\r\n" + 
 				"FROM `cat_perod`.`produits`;";
-		System.out.print("entered produit mc");
+//		System.out.print("entered produit mc");
 		try {
 			ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery(query);
@@ -119,7 +119,7 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 
 			ResultSet rs = ps.executeQuery();							
 			if(!rs.next()) {
-				System.out.println("Le produit don't la referance "+ref+" est introuvable");
+//				System.out.println("Le produit don't la referance "+ref+" est introuvable");
 			}
 			else {
 				rs.beforeFirst();
@@ -131,10 +131,10 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 			         int quantite = rs.getInt("QUANTITE");
 
 			         //Display values
-			         System.out.print("Refrence: " + refe);
-			         System.out.print(", Desingnation: " + design);
-			         System.out.print(", Prix: " + prix);
-			         System.out.println(", Quantite: " + quantite);
+//			         System.out.print("Refrence: " + refe);
+//			         System.out.print(", Desingnation: " + design);
+//			         System.out.print(", Prix: " + prix);
+//			         System.out.println(", Quantite: " + quantite);
 			      }
 
 			}
@@ -149,7 +149,7 @@ public class CatalogueMetierImpl implements ICatalogueMetier{
 
 	@Override
 	public void updateProduit(Produit p) {
-		 System.out.print("entere update quary");
+//		 System.out.print("entere update quary");
 		// TODO Auto-generated method stub
 		String query = "UPDATE `cat_perod`.`produits`\r\n" + 
 				"SET `DESIGNATION` = ?,`PRIX` = ?,`QUANTITE` = ?\r\n" + 

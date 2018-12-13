@@ -31,7 +31,7 @@ boolean add = true;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("INSIDE THE POSTT");
+//		System.out.println("INSIDE THE POSTT");
 
 		ProduitModel model = new ProduitModel();
 
@@ -39,15 +39,15 @@ boolean add = true;
 		String action = request.getParameter("action");
 //filling table
 		if (action != null) {
-			System.out.println("first if");
+//			System.out.println("first if");
 			if (action.equals("chercher")) {
-				System.out.println("secod if");
+//				System.out.println("secod if");
 				model.setMotCle(request.getParameter("motCle"));
 				List<Produit> produits = metier.produitParMC(model.getMotCle());
 				model.setProduits(produits);
 				request.getRequestDispatcher("VueProduits.jsp").forward(request, response);
 			} else if (action.equals("delete")) {// delete from table
-				System.out.println("enter DELETE");
+//				System.out.println("enter DELETE");
 				String ref = request.getParameter("ref");
 				metier.deleteProduit(ref);
 				List<Produit> produits = metier.listProduit();
@@ -57,7 +57,7 @@ boolean add = true;
 			}
 			else if (action.equals("edit")) {
 				add=false;
-				System.out.println("enter edite");
+//				System.out.println("enter edite");
 				String ref = request.getParameter("ref");
 				metier.getProduit(ref);
 				List<Produit> produits = metier.listProduit();
@@ -71,7 +71,7 @@ boolean add = true;
 				request.getRequestDispatcher("/VueProduits.jsp").forward(request, response);
 				
 			}else if (action.equals("save")&&!add) {
-				System.out.println("enter save");
+//				System.out.println("enter save");
 				Produit p = new Produit(request.getParameter("ref"), request.getParameter("reg"),
 						Double.valueOf(request.getParameter("prix")), Integer.valueOf(request.getParameter("quantite")));
 				
@@ -97,7 +97,7 @@ boolean add = true;
 				request.getRequestDispatcher("/VueProduits.jsp").forward(request, response);
 				
 			}else if (action.equals("save")&&add) {
-				System.out.println("entered adding to database");
+//				System.out.println("entered adding to database");
 				Produit p = new Produit(request.getParameter("ref"), request.getParameter("reg"),
 						Double.valueOf(request.getParameter("prix")), Integer.valueOf(request.getParameter("quantite")));
 				metier.addProduit(p);
@@ -108,7 +108,7 @@ boolean add = true;
 			}
 			
 		} else {
-			System.out.println("nuuuuuuuuuuul");
+//			System.out.println("nuuuuuuuuuuul");
 			response.sendRedirect("VueProduits.jsp");
 		}
 
